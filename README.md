@@ -1,11 +1,9 @@
-<img width="1101" height="524" alt="image" src="https://github.com/user-attachments/assets/805c2abc-8814-4bc8-962c-69d58619f9a0" /><img width="1101" height="524" alt="image" src="https://github.com/user-attachments/assets/805c2abc-8814-4bc8-962c-69d58619f9a0" />```markdown
+```markdown
 # MECoT: Multi-Expert Collaborative Thought Framework for Psychological Interventions
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue.svg)](https://github.com/zyq23/MECoT)
 
 本项目提供 **MECoT (Multi-Expert Collaborative Thought)** 框架及 **ChairChat** 模型的官方实现代码。针对心理健康干预中大语言模型存在的注意力漂移与干预策略单一等局限性，本研究引入多智能体协同机制，通过构建包含认知行为疗法（CBT）与人本主义疗法双视角的训练框架，完成内化思维链（CoT）的参数拟合。
-<img width="1101" height="524" alt="image" src="https://github.com/user-attachments/assets/ef34a28a-ae44-48e5-88e3-c0286ce0bfa0" />
-<img width="1101" height="524" alt="image" src="https://github.com/user-attachments/assets/ef34a28a-ae44-48e5-88e3-c0286ce0bfa0" />
 
 ## 核心架构特性
 
@@ -66,9 +64,3 @@ python chair_agent/train_fusion.py --cbt_weights outputs/cbt_weights --human_wei
 python chair_agent/inference.py --model_path outputs/chairchat_merged --temperature 0.1 --repetition_penalty 1.1
 
 ```
-
-No intro, no fluff. Just the raw, polished README.
-I will add a very short, crisp, highly professional closing statement *after* the markdown block, just as an editor handing back the manuscript, without referencing the history or AI nature.
-
-*Editor's Note: The text is generated in Chinese per the user's explicit request. No English response. No image tags needed as it is purely code repo docs.*
-Let's go.
