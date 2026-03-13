@@ -1,8 +1,7 @@
-# MECoT: Multi-Expert Collaborative Thought Framework for Psychological Interventions
+# MECoT: Internalizing Multi-Expert Chain-of-Thought for Interpretable Mental Health Support
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue.svg)](https://github.com/zyq23/MECoT)
 
-本项目提供 **MECoT (Multi-Expert Collaborative Thought)** 框架及 **ChairChat** 模型的官方实现代码。针对心理健康干预中大语言模型存在的注意力漂移与干预策略单一等局限性，本研究引入多智能体协同机制，通过构建包含认知行为疗法（CBT）与人本主义疗法双视角的训练框架，完成内化思维链（CoT）的参数拟合。
+本项目提供 **MECoT** 框架及 **ChairChat** 模型的官方实现代码。针对心理健康干预中大语言模型存在的注意力漂移与干预策略单一等局限性，本研究引入多智能体协同机制，通过构建包含认知行为疗法（CBT）与人本主义疗法双视角的训练框架，完成内化思维链（CoT）的参数拟合。
 
 ## 核心架构特性
 
@@ -14,18 +13,17 @@
 
 本仓库的代码逻辑与论文中提出的干预框架严格对齐，主要包含三大核心训练与决策模块：
 
-* `cbt_model/`: 认知行为疗法（CBT）专家模型的独立训练与微调代码。
-* `humanistic_model/`: 人本主义疗法专家模型的独立训练与微调代码。
-* `chair_agent/`: 主席智能体（Chair Agent）的多视角动态仲裁与综合决策代码，负责融合双流派回复并输出最终干预策略。
-* `outputs/`: 存储独立专家模型与 ChairChat 模型的 LoRA 权重，以及与 ChatGLM2-6B 融合后的完整权重文件。
-* `data/`: 包含构建三千余条多流派视角的心理健康对话数据集示例格式。
+* `cbt_finetune/`: 认知行为疗法（CBT）专家模型的独立训练与微调代码。
+* `humanistic_finetune/`: 人本主义疗法专家模型的独立训练与微调代码。
+* `chair_finetune/`: 主席智能体（Chair Agent）的多视角动态仲裁与综合决策代码，负责融合双流派回复并输出最终干预策略。
+* `data_chair_enhance_cleaned/`: 包含构建三千余条多流派视角的心理健康对话数据集示例格式。
 
 ## 硬件与环境依赖
 
 模型的训练过程在配备 NVIDIA RTX 3090 GPU 的硬件环境中进行验证。环境配置要求如下：
 
 ```bash
-git clone [https://github.com/zyq23/MECoT.git](https://github.com/zyq23/MECoT.git)
+git clone https://github.com/zyq23/MECoT.git
 cd MECoT
 pip install -r requirements.txt
 
@@ -39,10 +37,10 @@ pip install -r requirements.txt
 
 ```bash
 # CBT专家模型训练
-python cbt_model/train.py --data_path data/cbt_train.json --output_dir outputs/cbt_weights --precision bfloat16
+python cbt_finetune/train_cbt.py
 
 # 人本主义专家模型训练
-python humanistic_model/train.py --data_path data/human_train.json --output_dir outputs/human_weights --precision bfloat16
+python humanistic_finetunel/train_humanistic.py
 
 ```
 
@@ -51,7 +49,7 @@ python humanistic_model/train.py --data_path data/human_train.json --output_dir 
 在专家模型训练完成后，启动综合决策模块，训练内化思维链逻辑，将诊断与推演机制内化至模型参数空间中：
 
 ```bash
-python chair_agent/train_fusion.py --cbt_weights outputs/cbt_weights --human_weights outputs/human_weights --output_dir outputs/chairchat_merged
+python chair_finetunel/train_chair_final.py
 
 ```
 
@@ -60,6 +58,6 @@ python chair_agent/train_fusion.py --cbt_weights outputs/cbt_weights --human_wei
 在推理阶段，严格约束解码策略的超参数配置。设定极低的温度参数以执行确定性推理，并设定重复惩罚为 1.1，有效推进干预逻辑，防止模型陷入重复追问：
 
 ```bash
-python chair_agent/inference.py --model_path outputs/chairchat_merged --temperature 0.1 --repetition_penalty 1.1
+python chair_finetunel/inference_chair.py
 
 ```
