@@ -1,4 +1,3 @@
-```markdown
 # MECoT: Multi-Expert Collaborative Thought Framework for Psychological Interventions
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue.svg)](https://github.com/zyq23/MECoT)
