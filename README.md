@@ -1,6 +1,6 @@
-# MECoT: Internalizing Multi-Expert Chain-of-Thought for Interpretable Mental Health Support
+# PsyMECoT: Internalizing Multi-Expert Chain-of-Thought for Interpretable Mental Health Support
 
-本项目提供 **MECoT** 框架及 **ChairChat** 模型的官方实现代码。针对心理健康干预中大语言模型存在的注意力漂移与干预策略单一等局限性，本研究引入多智能体协同机制，通过构建包含认知行为疗法（CBT）与人本主义疗法双视角的训练框架，完成内化思维链（CoT）的参数拟合。
+本项目提供 **PsyMECoT** 框架及 **ChairChat** 模型的官方实现代码。针对心理健康干预中大语言模型存在的注意力漂移与干预策略单一等局限性，本研究引入多智能体协同机制，通过构建包含认知行为疗法（CBT）与人本主义疗法双视角的训练框架，完成内化思维链（CoT）的参数拟合。
 
 ## 核心架构特性
 
@@ -88,8 +88,8 @@ TRAIN_SYSTEM_PROMPT = """你不是普通的心理咨询师，你是**"多专家�
 模型的训练过程在配备 NVIDIA RTX 3090 GPU 的硬件环境中进行验证。环境配置要求如下：
 
 ```bash
-git clone https://github.com/zyq23/MECoT.git
-cd MECoT
+git clone https://github.com/zyq23/PsyMECoT.git
+cd PsyMECoT
 pip install -r requirements.txt
 ```
 
